@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage ('checkout code') {
       steps {
-        git 'https://github.com/sohail7295'
+        git 'https://github.com/sohail7295/crudApp'
       }
    }
   }
