@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+        maven 'M3'
+    }
   stages {
     stage ('checkout code') {
       steps {
@@ -8,7 +11,6 @@ pipeline {
    }
     stage ('Run Build') {
       steps {
-        def mvnHome = tool 'M3'
         sh "${mvnHome}/bin/mvn clean package"
       }
     }
