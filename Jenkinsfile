@@ -21,7 +21,7 @@ pipeline {
     }
     stage ('Copy to tomcat') {
       steps {
-      sh "wget http://192.168.56.103:8081/nexus/service/local/repositories/releases/content/Central/crudApp/2.1/crudApp-2.2.war -P /opt/apache-tomcat-9.0.14/webapps/."
+      sh "wget http://192.168.56.103:8081/nexus/service/local/repositories/releases/content/Central/crudApp/2.2/crudApp-2.2.war -P /opt/apache-tomcat-9.0.14/webapps/."
       }
     }
   }
