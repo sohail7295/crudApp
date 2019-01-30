@@ -14,5 +14,10 @@ pipeline {
         sh "/opt/apache-maven-3.3.9/bin/mvn clean package"
       }
     }
+    stage ('Nexus') {
+      steps {
+      nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'Central', nexusUrl: '192.168.56.103:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '2.1'
+      }
+    }
   }
 }
