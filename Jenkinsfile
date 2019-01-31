@@ -2,7 +2,12 @@ pipeline {
     agent any
     
         stages {
+            stage('GitPull'){
+                steps{
+                    git 'https://github.com/dineshp4/crudApp'
+                }
             
+            }
             stage('Build') {
                 steps {
                     sh 'mvn -Dmaven.test.failure.ignore=true clean package'
