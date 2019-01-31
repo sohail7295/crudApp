@@ -1,10 +1,12 @@
 pipeline {
     agent any
-    
-        stages {
+    tools {
+        maven 'maven'
+    }
+    stages {
             stage('GitPull'){
                 steps{
-                    git 'https://github.com/dineshp4/crudApp'
+                    git 'https://github.com/sohail7295/crudApp'
                 }
             
             }
