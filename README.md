@@ -9,7 +9,7 @@ Steps to run
 -Take the war from target directory 
 
 -Drop it in tomcat(7 or 8) webapps
-hg
+
 
 -Access the app at
  
