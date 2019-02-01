@@ -12,7 +12,7 @@ pipeline {
             }
             stage ('Run Build') {
                 steps {
-                     sh "/home/ec2-user/apache-maven-3.3.9/bin/mvn clean package"
+                     sh 'mvn -Dmaven.test.failure.ignore=true clean package'
                       }
              }
 
