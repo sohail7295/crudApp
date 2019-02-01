@@ -10,12 +10,12 @@ pipeline {
                 }
             
             }
-            stage('Build') {
+            stage ('Run Build') {
                 steps {
-                    sh 'mvn -Dmaven.test.failure.ignore=true clean package'
-                    //sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
-                    }
-               
+                     sh "/home/ec2-user/apache-maven-3.3.9/bin/mvn clean package"
+                      }
+             }
+
             }
            stage ('TomcatRestart') {
                 steps {
