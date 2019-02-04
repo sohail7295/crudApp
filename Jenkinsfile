@@ -16,12 +16,12 @@ pipeline {
     }
     stage ('Nexus') {
       steps {
-      nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'Central', nexusUrl: '52.15.195.137:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '2.7'
+      nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'Central', nexusUrl: '52.14.90.202:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '2.8'
       }
     }
     stage ('Copy to tomcat') {
       steps {
-        sh "sudo wget http://52.15.195.137:8081/nexus/service/local/repositories/releases/content/Central/crudApp/2.7/crudApp-2.7.war -O /opt/apache-tomcat-9.0.14/webapps/crudApp.war"
+        sh "sudo wget http://52.14.90.202:8081/nexus/service/local/repositories/releases/content/Central/crudApp/2.8/crudApp-2.8.war -O /opt/apache-tomcat-9.0.14/webapps/crudApp.war"
         sh "sudo sh /opt/apache-tomcat-9.0.14/bin/catalina.sh stop"
         sh "sudo sh /opt/apache-tomcat-9.0.14/bin/catalina.sh start"
       }
