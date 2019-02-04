@@ -22,7 +22,7 @@ pipeline {
     }
 
     
-    stage ('Copy to tomcat') {
+    stage ('Copy tomcat') {
       steps {
         sh "sudo wget http://3.17.203.182:8081/nexus/service/local/repositories/releases/content/Central/crudApp/3.${BUILD_NUMBER}/crudApp-3.${BUILD_NUMBER}.war -O /opt/apache-tomcat-9.0.14/webapps/crudApp.war"
         sh "sudo sh /opt/apache-tomcat-9.0.14/bin/catalina.sh stop"
