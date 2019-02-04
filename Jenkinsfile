@@ -17,7 +17,7 @@ pipeline {
     
      stage ('Nexus') {
       steps {
-      nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'Central', nexusUrl: '3.17.203.182:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '2.7'
+      nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'Nexus', groupId: 'Central', nexusUrl: '3.17.203.182:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '2.7'
       }
     }
 
