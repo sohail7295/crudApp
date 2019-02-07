@@ -1,0 +1,9 @@
+root_db_password: ZXcvb12___678
+
+db_password: GmiC___465
+
+db_user: dbowner
+
+db_name: CRUDAPPDB
+
+app_hostname: "{{ hostvars['tomcat'].ansible_host }}"

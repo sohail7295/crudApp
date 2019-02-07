@@ -1,0 +1,78 @@
+---
+
+- name: command to install epel-release
+  yum_repository:
+     name: epel
+     state: present
+     baseurl: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+- name: Install python-pip for pexpect 3.3 above
+  yum: name=python-pip state=latest
+
+- name: Install pexpect using pip
+  pip: name=pexpect
+
+- name: Add the MySql Community Repo
+  yum_repository:
+    name: "mysql-community-server"
+    description: "Opensource MYSQLD for WEBAPP"
+    baseurl: http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
+    enabled: 1
+    gpgcheck: 0
+
+- name: Update the OS
+  yum: update_cache=yes name=* state=latest
+  tags:
+    - update
+
+- name: Install MySQL Server
+  yum: name=mysql-community-server state=present
+
+- name: Install MySQL-python, this is required for the task remove anonymous user
+  yum: name=MySQL-python state=present
+
+- name: Start MySQL Server and enable it
+  service: name=mysqld state=started enabled=yes
+
+- name: Find temporary password
+  shell: "echo `grep 'temporary.*root@localhost' /var/log/mysqld.log | sed 's/.*root@localhost: //'`"
+  register: mysql_root_password_temp
+  tags: register
+
+- debug: msg="{{mysql_root_password_temp.stdout}}"
+  tags: register
+
+#- name: Transfer the script
+#  copy: src=mysql_secure_installation.sh dest=/home/ansible mode=0777
+
+- name: Spawn Expect for mysql_secure_installation responses
+  expect:
+    command: mysql_secure_installation
+    responses:
+      'Enter password for user root': '{{mysql_root_password_temp.stdout}}'
+      'New password': '{{ root_db_password }}'
+      'Re-enter new password': '{{ root_db_password }}'
+      'Change the password for root': 'n'
+      'Remove anonymous users': 'y'
+      'Disallow root login remotely': 'y'
+      'Remove test database and access to it': 'y'
+      'Reload privilege tables now': 'y'
+    echo: yes
+  tags:
+    - expect
+
+- name: update mysql root password for all root accounts
+  mysql_user: login_user=root login_password={{ root_db_password }} name={{ db_user }} host={{ item }} password={{ db_password }} priv='*.*:ALL,GRANT' state=present
+  with_items:
+    - "{{ app_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: copy over the db.sql script to create db for crudapp team
+  copy: src=db.sql dest=/tmp/db.sql
+
+- name: create the database
+  mysql_db: name={{ db_name }} state=present login_user=root login_password={{ root_db_password }}
+
+- name: execute the db.sql
+  mysql_db: name={{ db_name }} state=import target=/tmp/db.sql login_user=root login_password={{ root_db_password }}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+<Resource name="jdbc/crudDB" auth="Container"
+		type="javax.sql.DataSource"
+		username="{{ db_admin_user }}"
+		password="{{ db_admin_password }}"
+		driverClassName="com.mysql.jdbc.Driver"
+		description="Global Address Database"
+		url="jdbc:mysql://{{ db_host }}:3306/{{ db_name }}" maxActive="15" maxIdle="3"/>
+</Context>

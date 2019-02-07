@@ -1,0 +1,47 @@
+###### Oracle JDK Download Details #####
+
+jdk_download_url: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.tar.gz
+jdk_archive_file: jdk-8u45-linux-x64.tar.gz
+jdk_extract_dir: jdk1.8.0_45
+
+##### Tomcat Details #####
+
+tomcat_version: 8.5.23
+
+http_port: 8080
+ajp_port: 8009
+
+ipv6_disable: True
+
+jmx_registry_port: 10080
+jmx_server_port: 10081
+
+
+####tomcat########
+admin_username: admin
+admin_password: admin
+##DB######
+db_admin_user: dbowner
+db_admin_password: GmiC___465
+db_name: CRUDAPPDB
+db_host: tomcatsql.ct1ow8vctbcz.us-east-1.rds.amazonaws.com
+
+##### Tomcat Heap Parameters ####
+
+min_heap_size: 512M
+max_heap_size: 512M
+metaspace_size: 128M
+max_metaspace_size: 128M
+
+##### Tomcat Loggin Parameters #####
+
+gc_log_file: /opt/tomcat/logs/gc.log
+heap_dump_dir: /opt/tomcat/logs/
+
+##### Maven_repositopry_details #####
+
+nexus_grp_id: com.crudapp.main
+artifact_name: CRUDAPP
+nexus_extentions: war
+nexus_repo_url: 'http://10.10.0.60:8081/nexus/content/repositories/DEV-CRUDAPP'
+artifact_destination: '/opt/tomcat/webapps/crudapp.war'

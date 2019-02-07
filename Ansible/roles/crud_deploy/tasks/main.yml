@@ -1,0 +1,10 @@
+---
+
+- name: Download Artifact from Maven Repo to Webservers 
+  maven_artifact:
+    group_id: "{{ nexus_grp_id }}"
+    artifact_id: "{{ artifact_name }}"
+    extension: "{{ nexus_extentions }}"
+    repository_url: "{{ nexus_repo_url }}"
+    dest: "{{ artifact_destination }}"
+
