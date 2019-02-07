@@ -1,0 +1,11 @@
+---
+# oracle-jdk8, tomcat8
+
+- hosts: Ankit_EC2
+  become: yes 
+  
+  roles:
+    
+    - mysql
+
+
