@@ -8,6 +8,8 @@ Steps to run, what
    
 -Take the war from target directory 
 
+sasacaa
+
 -Drop it in tomcat(7 or 8) webapps
 
 
